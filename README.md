@@ -1,2 +1,3 @@
 # mycode
 alta3basics
+I want to learn how to version control projects with git
