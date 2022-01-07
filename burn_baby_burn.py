@@ -47,8 +47,8 @@ rooms = {
                  'item'  : 'blanket'
                 },
 
-                 'hall' : {
-                   'left' : 'Hall',
+                 'Hall' : {
+                   'left' : 'Stairs',
                    'item' : 'axe',
                 },
             
@@ -115,11 +115,11 @@ while True:
       print('Can\'t get ' + move[1] + '!')
 
   ## Define how a player can win
-  if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
-    print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
+  if currentRoom == 'Garden' and 'dog' in inventory and 'phone' in inventory:
+    print('You escaped the house with a new friend and now you can call an uber ... YOU WIN!')
     break
 
   ## If a player enters a room with a monster
-  elif 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom]['item']:
-    print('A monster has got you... GAME OVER!')
+  elif 'item' in rooms[currentRoom] and 'fire' in rooms[currentRoom]['item']:
+    print('Your skin is melting off your bones... GAME OVER!')
     break
