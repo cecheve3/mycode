@@ -4,20 +4,29 @@
 # navigate by color scheme: pick up items to help or hurt you
 # if lives expire: die!!!!!! || if successful: LIVE (but you lost everything and you don'thave insurance. :D
 
+
+from colorama import Fore, Back, Style
+# print(Fore.RED + 'some red text')
+# print(Back.GREEN + 'and with a green background')
+# print(Style.DIM + 'and in dim text')
+# print(Style.RESET_ALL)
+# print('back to normal now')
+
 def showInstructions():
   #print a main menu and the commands
   print('''
-RPG Game
+Tears of the Inferno
 ========
 Commands:
   go [direction]
+  open [doors/windows]
   get [item]
 ''')
 
 def showStatus():
   #print the player's current status
   print('---------------------------')
-  print('You are in the ' + currentRoom)
+  print("You bolt upright! You smell smoke! AGHHHGHHGH! You blacked out from a long night out on the town. You don't know who's house this is. You're in some kind of " + currentRoom)
   #print the current inventory
   print('Inventory : ' + str(inventory))
   #print an item if there is one
@@ -32,18 +41,19 @@ inventory = []
 ## A dictionary linking a room to other rooms
 rooms = {
 
-            'Hall' : {
-                  'south' : 'Kitchen',
-                  'east'  : 'Dining Room',
-                  'item'  : 'key'
+              'Closet' : {
+                  'door' : 'Hall',
+                'panic'  : 'still in closet',
+                 'item'  : 'blanket'
                 },
 
-            'Kitchen' : {
-                  'north' : 'Hall',
-                  'item'  : 'monster',
+                 'hall' : {
+                   'left' : 'Hall',
+                   'item' : 'axe',
                 },
-            'Dining Room' : {
-                  'west' : 'Hall',
+            
+          'Dining Room' : {
+              'straight' : '',
                   'south': 'Garden',
                   'item' : 'potion',
                   'north' : 'Pantry',
@@ -58,7 +68,7 @@ rooms = {
          }
 
 #start the player in the Hall
-currentRoom = 'Hall'
+currentRoom = 'Closet'
 
 showInstructions()
 
@@ -80,7 +90,7 @@ while True:
   move = move.lower().split(" ", 1)
 
   #if they type 'go' first
-  if move[0] == 'go':
+  if move[0] == 'open':
     #check that they are allowed wherever they want to go
     if move[1] in rooms[currentRoom]:
       #set the current room to the new room
