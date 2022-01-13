@@ -1,125 +1,45 @@
 #!/usr/bin/env python3
 
-# sleeping: wake up: smell smoke: house on fire: time limit? lives? moves?
-# navigate by color scheme: pick up items to help or hurt you
-# if lives expire: die!!!!!! || if successful: LIVE (but you lost everything and you don'thave insurance. :D
-
-
-from colorama import Fore, Back, Style
-# print(Fore.RED + 'some red text')
-# print(Back.GREEN + 'and with a green background')
-# print(Style.DIM + 'and in dim text')
-# print(Style.RESET_ALL)
-# print('back to normal now')
+import random
 
 def showInstructions():
-  #print a main menu and the commands
+  #print a main menu and the instructions
   print('''
-Tears of the Inferno
-========
-Commands:
-  go [direction]
-  open [doors/windows]
-  get [item]
-''')
+Molly's Game
 
-def showStatus():
-  #print the player's current status
-  print('---------------------------')
-  print("You bolt upright! You smell smoke! AGHHHGHHGH! You blacked out from a long night out on the town. You don't know who's house this is. You're in some kind of " + currentRoom)
-  #print the current inventory
-  print('Inventory : ' + str(inventory))
-  #print an item if there is one
-  if "item" in rooms[currentRoom]:
-    print('You see a ' + rooms[currentRoom]['item'])
-  print("---------------------------")
-
-#an inventory, which is initially empty
-inventory = []
-
-#a dictionary linking a room to other rooms
-## A dictionary linking a room to other rooms
-rooms = {
-
-              'Closet' : {
-                  'door' : 'Hall',
-                'panic'  : 'still in closet',
-                 'item'  : 'blanket'
-                },
-
-                 'Hall' : {
-                   'left' : 'Stairs',
-                   'item' : 'axe',
-                },
-            
-          'Dining Room' : {
-              'straight' : '',
-                  'south': 'Garden',
-                  'item' : 'potion',
-                  'north' : 'Pantry',
-               },
-            'Garden' : {
-                  'north' : 'Dining Room'
-               },
-            'Pantry' : {
-                  'south' : 'Dining Room',
-                  'item' : 'cookie',
-            }
-         }
-
-#start the player in the Hall
-currentRoom = 'Closet'
+===============================================
+Instructions:
+  -Start with 5 players in the game. 
+  -You all start at the starting point.
+  (position 0)
+  -The objective of the game is to make it 
+  to the safe zone.
+  (position 8)
+  -The way to move forward is to guess a 
+  number between 1-15.
+  -The players that guess the closest move up 
+  by one position.
+  -The player that guesses the furthest will
+  be eliminated.
+  
+===============================================
+  ''')
+##players
+players= ["P1", "P2", "P3", "P4", "P5"]
 
 showInstructions()
+print('''Hi my name's Molly. You have to play my
+        game. If you lose, something bad will
+        happen. If you win, you can be my 
+        friend. Are you ready to play? ''')
 
-#loop forever
-while True:
+molly_number= random.randint(1, 15)
 
-  showStatus()
+finished_pos= 5
+current_player= 1
 
-  #get the player's next 'move'
-  #.split() breaks it up into an list array
-  #eg typing 'go east' would give the list:
-  #['go','east']
-  move = ''
-  while move == '':
-    move = input('>')
+while finished_pos > 0:
+    if current_player == 1:
+        guess = int(input("Player_1 please enter a number from 1 to 15, {} moves to win. ".format(finished_pos)))
 
-  # split allows an items to have a space on them
-  # get golden key is returned ["get", "golden key"]          
-  move = move.lower().split(" ", 1)
-
-  #if they type 'go' first
-  if move[0] == 'open':
-    #check that they are allowed wherever they want to go
-    if move[1] in rooms[currentRoom]:
-      #set the current room to the new room
-      currentRoom = rooms[currentRoom][move[1]]
-    #there is no door (link) to the new room
-    else:
-        print('You can\'t go that way!')
-
-  #if they type 'get' first
-  if move[0] == 'get' :
-    #if the room contains an item, and the item is the one they want to get
-    if "item" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item']:
-      #add the item to their inventory
-      inventory += [move[1]]
-      #display a helpful message
-      print(move[1] + ' got!')
-      #delete the item from the room
-      del rooms[currentRoom]['item']
-    #otherwise, if the item isn't there to get
-    else:
-      #tell them they can't get it
-      print('Can\'t get ' + move[1] + '!')
-
-  ## Define how a player can win
-  if currentRoom == 'Garden' and 'dog' in inventory and 'phone' in inventory:
-    print('You escaped the house with a new friend and now you can call an uber ... YOU WIN!')
-    break
-
-  ## If a player enters a room with a monster
-  elif 'item' in rooms[currentRoom] and 'fire' in rooms[currentRoom]['item']:
-    print('Your skin is melting off your bones... GAME OVER!')
-    break
+        finished_pos
