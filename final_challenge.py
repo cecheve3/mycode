@@ -66,6 +66,7 @@ def target_1():
         if guess == x:
             print(Fore.RED + 'Face Melt!')
             target_2()
+            break
 
         elif distance == 1:
             print(Fore.RED + temp_str[1])
@@ -133,6 +134,7 @@ def target_2():
         if guess == x:
             print(Fore.RED + 'Face Melt!')
             target_3()
+            break
             
             
 
@@ -229,7 +231,7 @@ def target_3():
 
 
 
-        if count >= math.log(upper - lower + 1, 1):
+        if count >= math.log(upper - lower + 1, 2):
             print(Fore.YELLOW + "\nThe number is %d" % x)
             print(Fore.YELLOW + "\tThe safe is locked forevere")
             break
@@ -241,4 +243,6 @@ def end():
     
 def main():
     target_1()
+    
+        
 main()
