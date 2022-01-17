@@ -1,71 +1,64 @@
 #!/usr/bin/env python3
 
-import random
+from random import randint
+from colorama import Fore
 
 def showInstructions():
   #print a main menu and the instructions
-  print('''
-Molly's Game
+  print(Fore.GREEN +'''
+Final Boss Casting Game
 
 ===============================================
 Instructions:
-  -Start with 5 players in the game. 
-  -You all start at the starting point.
-  (position 0)
-  -The objective of the game is to make it 
-  to the safe zone.
-  (position 5)
-  -The way to move forward is to guess a 
-  number between 1-15.
-  -The players that guess the closest move up 
-  by one position.
-  -The player that guesses the furthest will
-  be eliminated.
-  
+  -The objective of the game is to cast down 
+  the final boss.
+  -You will be asked to guess a number between 
+  1 and 7.
+  -You will have 3 attempts to guess correctly. 
+  -If you guess correct, you will get a 5x
+  bonus on your cast.
+  -Incorrect guesses result in taking x5 damage.
+  -You each start off with 100 health
+  -You will roll a die to determine how much 
+  damage you will inflict on your opponent.
+    -Example: If you guessed correct, and you 
+    rolled a 6, you will inflict 30 damage to 
+    the boss. If you guess incorrect, and you
+    roll a 6, you take 30 damage.
+  -Defeat the final boss or forever be shamed!
 ===============================================
   ''')
-##players
 
-finished= False
-guesses= 0
-##players= {"P1": {"choice": 0,
-  ##              "place": 1},
-  ##        "P2": {"choice": 0,
-  ##              "place": 1},
-  ##        "P3": {"choice": 0,
-  ##              "place": 1},
-  ##        "P4": {"choice": 0,
-  ##              "place": 1},
-  ##        "P5": {"choice": 0,
-  ##              "place": 1}
-  ##      }
-            # complete rest of dict
-    
-print('''Hi my name's Molly. You have to play my
-        game. If you lose, something bad will
-        happen. If you win, you can be my 
-        friend. Are you ready to play? ''')
+die = 6
+boss_health = 100
+player_health = 100
+tries = 0
+roll = randint(1, die)
+attack_boss = boss_health - roll
+attack_player = player_health - roll
 
-# while loop that would run until there's only one left or someone has reached the finish line
-while finished == False and len(players) <= 1:
-        
-# have some repeatable code that accepts a guess, saves it to "choice" in the players dictionary
-# have some other code that compares each players' choice
-   num_guess= 0
-   answer= random.randint(1, 15)
-   choice= input()
-   for x in players:
-       while num_guess < 5:
-           guess= input(f"{player[x]} > {choice}")
-           num_guess +=1
-           players["x"]["choice"] +=1
-           break
+showInstructions()
 
-       
-# run this line for whichever player bites it
-#del players["P1"]
+def main():
+    while boss_health != 0 or player_health != 0:
 
+            a = random.randint(1, 7)
+            g = int(raw_input(Fore.WHITE + "Enter a number between 1 and 7:\n> "))
+            
+            if g == a:
+                r = input(Fore.BLUE + "Enter 'cast' to attack the boss!\n ").lower()
+                if r == "cast":
+                    attack_boss()
+            
+            elif g > a:
+                g = int(raw_input(Fore.RED + "Too high, try again: "))
+                tries += 1
 
+            elif g < a:
+                g = int(raw_input(Fore.RED + "Too low, try again: "))
+                tries += 1 
 
-
-  
+            else:
+                attack_player()
+            
+main()
