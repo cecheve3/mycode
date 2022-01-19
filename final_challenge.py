@@ -16,13 +16,11 @@ Instructions:
   try and figure out a lock combination. 
   -The model lock sequence consists of 3 
   numbers. 
-  -The dial goes from 0 to 10. You will start 
-  at 0 and go up to the first, then down to the 
-  second, then back up to the third. 
+  -The dial goes from 0 to 10.  
   -You will be given prompts to gauge how close
   you are. 
   -If it takes you more than 3 attempts for each
-  target, the lock will shut forever.
+  target, the lock will shut forever!
 
 ===============================================
   ''')
@@ -42,7 +40,7 @@ def target_1():
            
     x = randint(lower, upper)
     print(Fore.RED + "\n\tYou've only ", round(math.log(upper - lower + 1, 2)),
-    " chances to guess the target!\n")
+    " chances to guess the first target!\n")
         
     count = 1
     
@@ -110,7 +108,7 @@ def target_2():
 
     x = randint(lower, upper)
     print(Fore.RED + "\n\tYou've only ", round(math.log(upper - lower + 1, 2)),
-    "chances to guess the target!\n")
+    " chances to guess the second target!\n")
 
     count = 1
 
@@ -176,17 +174,18 @@ def target_3():
     # Taking Inputs
     upper = 10
 
-    # Keeping score
+    
             
 
     x = randint(lower, upper)
     print(Fore.RED + "\n\tYou've only ", round(math.log(upper - lower + 1, 2)),
-    " chances to guess the target!\n")
+    " chances to guess the last target!\n")
 
     count = 1
     #guess = int(input(Fore.YELLOW + "Guess a number:\n> "))
     #while guess != x and count != 4: 
-    while count < math.log(upper - lower + 1, 2):  #I can't get this to end when guess == x 
+    while count < math.log(upper - lower + 1, 2):   
+        
         count += 1
         guess = int(input(Fore.YELLOW + "Guess a number:\n> "))
         temp_str = {
@@ -239,8 +238,8 @@ def target_3():
     
 
 def end():
-    print(Fore.GREEN + "You have mastered the safe!")
-    
+    print(Fore.GREEN + "\t\n==============================\n\n\nYou have cracked the safe!\n\n\n==============================\n\n\n")
+
 def main():
     target_1()
     
